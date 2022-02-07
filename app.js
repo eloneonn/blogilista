@@ -11,6 +11,12 @@ const jwt = require('jsonwebtoken')
 
 // TODO: Middlewaret omaan moduuliin/moduuleihin
 
+if (process.env.NODE_ENV === 'test') {
+    const testingRouter = require('./controllers/testing')
+    app.use('/api/testing', testingRouter)
+    console.log('running in test mode');
+}
+
 const tokenExtractor = (request, response, next) => {
     const authorization = request.get('authorization')
 
